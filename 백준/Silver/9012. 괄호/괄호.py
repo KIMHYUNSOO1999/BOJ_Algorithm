@@ -1,35 +1,29 @@
-answer=[]
-N=int(input())
+from collections import deque
+import sys
+input=sys.stdin.readline
 
-for _ in range(N):
-    
-    toggle=0
-    toggle_start=0
-    VPS=input()
-
-    for i in range(len(VPS)):
-        
-        if toggle<0:
-            break
-    
-        if VPS[i]=='(':
-            if toggle_start==0:
-                toggle_start=1
-                toggle+=1
-            else:
-                toggle+=1
+def stack(st):
+    cnt=0
+    tmp=[]
+    while st:
+        i=st.popleft()
+        if i==')' and '(' not in tmp:
+            return 'NO'
+        elif i=='(':
+            tmp.append(i)
         else:
-            if toggle_start==1 and toggle==1:
-                toggle_start=0
-                toggle-=1
-            else:
-                toggle-=1
-            
-    if toggle==0 and toggle_start==0:
-        answer.append("YES")
+            tmp.pop(0)
+       
+    if len(tmp)>0:
+        return 'NO'
     else:
-        answer.append("NO")
-
-for row in answer:
-    print(row)
-   
+        return 'YES'
+    
+cnt=int(input().strip())
+answer=[]
+for i in range(cnt):
+    exam=deque(input().strip())
+    answer.append(stack(exam))
+    
+for i in answer:
+    print(i)
