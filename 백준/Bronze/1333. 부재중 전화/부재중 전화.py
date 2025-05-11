@@ -3,18 +3,22 @@ input = sys.stdin.readline
 
 N, L, D = map(int, input().split())
 
-L+=5
-num=0
-time=D
+time = [0]
+for i in range(1, N * 2):
+    if i % 2 == 1:
+        time.append(time[i - 1] + L)
+    else:
+        time.append(time[i - 1] + 5)
 
-for i in range(N):
-    num+=L
-    while True:
-        if time<num-5:
-            time+=D
-        else:
-            break
-    if num-5<=time<num:
+tmp = 0
+while True:
+    tmp += D 
+
+    for i in range(0, len(time), 2): 
+        start = time[i]
+        end = time[i + 1]
+        if start <= tmp < end:
+            break  
+    else:
+        print(tmp)
         break
-        
-print(time)
