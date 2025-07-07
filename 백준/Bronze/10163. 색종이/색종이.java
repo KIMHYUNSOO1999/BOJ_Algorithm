@@ -24,8 +24,8 @@ class Main {
 
         for (int i = 1; i <= n; i++) {
             int count = 0;
-            for (int j = 0; j <= 100; j++) {
-                for (int k = 0; k <= 100; k++) {
+            for (int j = 0; j < 1001; j++) {
+                for (int k = 0; k < 1001; k++) {
                     if (visited[j][k] == i) count++;
                 }
             }
