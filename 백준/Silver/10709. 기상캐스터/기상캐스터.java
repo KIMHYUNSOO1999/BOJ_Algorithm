@@ -24,19 +24,13 @@ class Main {
         }
 
         for (int i = 0; i < h; i++) {
-            int end = -1;  
             for (int j = 0; j < w; j++) {
-                if (arr[i][j]=='c') {
-                    visited[i][j]=0;
-                    end=j;
-                } 
-                else {
-                    if (end==-1) {
-                        visited[i][j]=-1;
-                    } 
-                    else {
-                        visited[i][j]=j-end;
-                    }
+                if (arr[i][j] == 'c') {
+                    visited[i][j] = 0; 
+                } else if (j > 0 && visited[i][j - 1]!=-1) {
+                    visited[i][j] = visited[i][j - 1]+1;
+                } else {
+                    visited[i][j]=-1; 
                 }
             }
         }
