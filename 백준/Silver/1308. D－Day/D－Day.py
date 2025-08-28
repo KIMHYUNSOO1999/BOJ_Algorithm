@@ -1,15 +1,13 @@
-from datetime import datetime
+import sys
+from datetime import datetime, timedelta
+input = sys.stdin.readline
 
-today=list(map(int,input().split()))
-target=list(map(int,input().split()))
+y1, m1, d1 = map(int, input().split())
+y2, m2, d2 = map(int, input().split())
 
-today_date=datetime(year=today[0],month=today[1],day=today[2])
-target_date=datetime(year=target[0],month=target[1],day=target[2])
+time = (datetime(y2, m2, d2) - datetime(y1, m1, d1)).days
 
-over_date=datetime(year=today[0]+1000,month=today[1],day=today[2])
-
-if target_date - today_date >= over_date-today_date:
+if (time >= 365243) :
     print("gg")
-else:
-    result=target_date-today_date
-    print(f"D-{result.days}")
+else :
+    print(f"D-{time}")
