@@ -1,26 +1,28 @@
+-- 코드를 입력하세요
 SELECT
-    FLAVOR
-FROM (
+    A.FLAVOR
+FROM 
+    (
     SELECT
         FLAVOR,
-        SUM(TOTAL_ORDER) AS TOTAL
-    FROM
-        FIRST_HALF 
-    GROUP BY
-        FLAVOR
-
-    UNION ALL
-
-    SELECT
-        FLAVOR,
-        SUM(TOTAL_ORDER) AS TOTAL
+        SUM(TOTAL_ORDER) AS TMP_SUM
     FROM
         JULY 
     GROUP BY
         FLAVOR
-) T
+
+    UNION
+
+    SELECT
+        FLAVOR,
+        SUM(TOTAL_ORDER) AS TMP_SUM
+    FROM
+        FIRST_HALF 
+    GROUP BY
+        FLAVOR
+    ) A
 GROUP BY
-    FLAVOR
+    A.FLAVOR
 ORDER BY
-    SUM(TOTAL) DESC
+    SUM(TMP_SUM) DESC
 LIMIT 3;
